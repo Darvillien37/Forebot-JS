@@ -40,11 +40,18 @@ bot.on('ready', () => {
 	logger.info('Connected');
 	logger.info('Logged in as: ' + bot.user.tag);
 
-	var serverList = "";
+	//List all the guilds the bot is connected to
+	var guildChanelList = "";
 	bot.guilds.forEach((guild) => {
-		serverList = serverList + "\n - " + guild.name;
+		guildChanelList = guildChanelList + "\n - " + guild.name;		
+
+		// List all channels in the guild
+		guild.channels.forEach((channel) => {
+			guildChanelList = guildChanelList + `\n\t -- ${channel.name} (${channel.type}) - ${channel.id}`;
+		})
 	})
-	logger.info('Servers:' + serverList);
+
+	logger.info('Guilds:' + guildChanelList);
 	
 });
 
