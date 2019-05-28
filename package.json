@@ -1,0 +1,8 @@
+{
+	"name": "ForebotJS",
+	"version": "1.0.0",
+	"description": "Forebot running with node JS",
+	"main": "bot.js",
+	"author": "Matthew Darvill",
+	"dependencies": {}
+}
