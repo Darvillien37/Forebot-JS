@@ -4,5 +4,8 @@
 	"description": "Forebot running with node JS",
 	"main": "bot.js",
 	"author": "Matthew Darvill",
-	"dependencies": {}
+	"dependencies": {
+		"discord.js": "^11.5.0",
+		"winston": "^3.2.1"
+	}
 }
