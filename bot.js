@@ -39,6 +39,12 @@ const bot = new Discord.Client()
 bot.on('ready', () => {
 	logger.info('Connected');
 	logger.info('Logged in as: ' + bot.user.tag);
+
+	var serverList = "";
+	bot.guilds.forEach((guild) => {
+		serverList = serverList + "\n - " + guild.name;
+	})
+	logger.info('Servers:' + serverList);
 	
 });
 
