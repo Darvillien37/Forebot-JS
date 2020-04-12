@@ -31,6 +31,8 @@ const Discord = require('discord.js');
 var location = 'D:\\GitHub\\ForebotToken';
 const auth = require(location + '/auth.json');
 
+const COMMAND_CHARACTER = '!';
+
 
 //Initialise the bot
 const bot = new Discord.Client()
@@ -51,16 +53,58 @@ bot.on('ready', () => {
 		})
 	})
 
-	logger.info('Guilds:' + guildChanelList);
-	
+	logger.info('Guilds:' + guildChanelList);	
 });
+
+bot.on('message', (receivedMessage) => {
+	// Prevent bot from responding to its own messages
+	if (receivedMessage.author == bot.user) {
+		return
+	}
+
+
+	if (receivedMessage.content.startsWith(COMMAND_CHARACTER)) {
+		ProcessCommand(receivedMessage)
+	}	
+})
 
 bot.login(auth.token);
 
 
 
 
-// ============================ Helper functions ==================================
+// ============================ Functions ==================================
+
+function ProcessCommand(receivedMessage) {
+	let fullCommand = receivedMessage.content.substr(1) // Remove the leading command character
+	let splitCommand = fullCommand.split(" ") // Split the message up in to pieces for each space
+
+	let primaryCommand = splitCommand[0] // The first word directly after the exclamation is the command
+	let args = splitCommand.slice(1) // All other words are arguments/parameters/options for the command
+
+	switch (primaryCommand) {
+		case "help":
+			HelpCommand(args, receivedMessage);
+			break;
+		
+	}
+}
+
+
+function HelpCommand(args, receivedMessage) {
+	
+	if (args.length == 0) {
+		receivedMessage.channel.send("Type '" + COMMAND_CHARACTER + "help [command]' to know about a specific command."
+			+ "\nToDo: list commands");
+	}
+	else
+	{
+		receivedMessage.channel.send("ToDo: rest of help command");		
+	}	
+}
+
+
+
 
 //Summary: 
 //	Function gets a formatted TimeDate string, formatted with either
